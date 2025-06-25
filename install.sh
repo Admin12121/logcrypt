@@ -140,6 +140,26 @@ main() {
     create_logcrypt_launcher
     echo "LogCrypt installation complete."
     echo "Enter 'logcrypt' to start the application."
+
+    SHELL_NAME=$(basename "$SHELL")
+    case "$SHELL_NAME" in
+        bash)
+            [ -f "$HOME/.bashrc" ] && source "$HOME/.bashrc"
+            ;;
+        zsh)
+            [ -f "$HOME/.zshrc" ] && source "$HOME/.zshrc"
+            ;;
+        fish)
+            [ -f "$HOME/.config/fish/config.fish" ] && source "$HOME/.config/fish/config.fish"
+            ;;
+        *)
+            # Try sourcing common rc files if shell is unknown
+            [ -f "$HOME/.bashrc" ] && source "$HOME/.bashrc"
+            [ -f "$HOME/.zshrc" ] && source "$HOME/.zshrc"
+            ;;
+    esac
+    echo "Shell environment reloaded. If 'logcrypt' is not found, restart your terminal."
+
 }
 
 main "$@"
