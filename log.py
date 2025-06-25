@@ -78,7 +78,7 @@ class LogHandler(FileSystemEventHandler):
             row = self.cursor.fetchone()
             if not row:
                 raise Exception("No user salt found")
-
+            
             kdf_salt = row[0]
             self.user_key = derive_aes_key(user_password, kdf_salt)
         except Exception as e:

@@ -157,7 +157,6 @@ class SecureApp(App):
                     await self.action_quit()
                     os.environ["USER_PASSWORD"] = password
                     code = run_loader(resume=True, password=password)
-                    os.environ.pop("USER_PASSWORD", None)
                     if code == 0:
                         print("✅ Application started. Opening log viewer...")
                         os.execvp("uv", ["uv", "run", "eye_view.py"])

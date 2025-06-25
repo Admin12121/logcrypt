@@ -136,7 +136,6 @@ class EyeViewerApp(App):
     async def on_mount(self):
         username = None
         password = os.environ.get("USER_PASSWORD")
-        # Get first username from DB
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
@@ -148,14 +147,13 @@ class EyeViewerApp(App):
                 username, stored_hash, kdf_salt = row
                 if password and stored_hash == hash_password(password):
                     user_key = derive_aes_key(password, kdf_salt)
-                    # Remove password from env after use
                     os.environ.pop("USER_PASSWORD", None)
                     self.push_screen(LogViewerScreen(username, user_key))
                     return
         except Exception as e:
             self.push_screen(ErrorScreen(f"Auto-login failed: {e}"))
             return
-        # If auto-login fails, fallback to login screen
+        
         self.push_screen(LoginScreen())
 
     async def on_button_pressed(self, event):
