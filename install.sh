@@ -49,9 +49,21 @@ configure_services() {
 }
 
 start_service() {
-    $SUDO $service
-    echo "$service is already running."
-
+    local service="$1"
+    # Try to kill the service if running
+    if pgrep -x "$(basename "$service")" >/dev/null 2>&1; then
+        echo "Stopping $service..."
+        $SUDO pkill -f "$service" || true
+        sleep 1
+    fi
+    echo "Starting $service..."
+    $SUDO $service &
+    sleep 1
+    if pgrep -x "$(basename "$service")" >/dev/null 2>&1; then
+        echo "$service started successfully."
+    else
+        echo "Failed to start $service."
+    fi
 }
 
 
@@ -118,8 +130,8 @@ main() {
     install_uv
     configure_services
     start_service rsyslogd
-    start_service sshd
-    start_service mariadb
+    start_service /usr/sbin/sshd
+    start_service service mariadb start
     setup_database
     create_logcrypt_launcher
     echo "LogCrypt installation complete."
