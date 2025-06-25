@@ -70,7 +70,7 @@ class LogHandler(FileSystemEventHandler):
             self.cursor = self.conn.cursor()
             print("[INFO] DB connection established.")
 
-            user_password = os.environ.get("USER_PASSWORD")
+            user_password = config("USER_PASSWORD", default=None)
             if not user_password:
                 raise Exception("USER_PASSWORD env var missing")
 

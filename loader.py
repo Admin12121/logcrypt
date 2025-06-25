@@ -40,12 +40,12 @@ SERVICES = [
     {
         "name": "application",
         "check": "log.py",
-        "start": ["/app/start.sh"]
+        "start": ["/logcrypt/start.sh"]
     }
 ]
 
 APP_LOG_PATH = "/var/log/app.log"
-APP_CWD = "/app"
+APP_CWD = "/logcrypt"
 LOADER_STATE_FILE = "loader_state.json"
 
 def hide_cursor():

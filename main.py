@@ -112,7 +112,6 @@ class SecureApp(App):
             return False
 
     def get_username(self) -> str:
-        """Get the first username from the database."""
         try:
             with get_db_connection() as conn:
                 with conn.cursor() as cursor:

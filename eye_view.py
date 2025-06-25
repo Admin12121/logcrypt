@@ -2,6 +2,7 @@ import sys
 import os
 import pathlib
 import time
+import asyncio
 from lib import get_db_connection
 from lib import derive_aes_key, decrypt_data, hash_password
 from textual.app import App, ComposeResult
@@ -135,7 +136,7 @@ class EyeViewerApp(App):
 
     async def on_mount(self):
         username = None
-        password = os.environ.get("USER_PASSWORD")
+        password = config("USER_PASSWORD", default=None)
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
@@ -147,7 +148,11 @@ class EyeViewerApp(App):
                 username, stored_hash, kdf_salt = row
                 if password and stored_hash == hash_password(password):
                     user_key = derive_aes_key(password, kdf_salt)
-                    os.environ.pop("USER_PASSWORD", None)
+                    env_path = pathlib.Path(".env")
+                    if env_path.exists():
+                        lines = env_path.read_text().splitlines()
+                        new_lines = [line for line in lines if not line.strip().startswith("USER_PASSWORD=")]
+                        env_path.write_text("\n".join(new_lines) + ("\n" if new_lines else ""))
                     self.push_screen(LogViewerScreen(username, user_key))
                     return
         except Exception as e:
