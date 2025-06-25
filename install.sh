@@ -48,13 +48,10 @@ configure_services() {
     [ -f /etc/ssh/sshd_config ] && $SUDO sed -i 's/^#\?\s*PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config || true
 }
 
-start_service_if_needed() {
-    local service="$1"
-    if ! pgrep -x "$service" &>/dev/null; then
-        $SUDO service "$service" start
-    else
-        echo "$service is already running."
-    fi
+start_service() {
+    $SUDO $service
+    echo "$service is already running."
+
 }
 
 
@@ -120,9 +117,9 @@ main() {
     install_dependencies
     install_uv
     configure_services
-    start_service_if_needed rsyslogd
-    start_service_if_needed sshd
-    start_service_if_needed mariadb
+    start_service rsyslogd
+    start_service sshd
+    start_service mariadb
     setup_database
     create_logcrypt_launcher
     echo "LogCrypt installation complete."
