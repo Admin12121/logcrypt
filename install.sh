@@ -31,7 +31,7 @@ detect_env() {
 
 install_dependencies() {
     $SUDO apt update
-    $SUDO apt install -y python3 openssh-server mariadb-server curl
+    $SUDO apt install -y python3 openssh-server mariadb-server rsyslog curl
 }
 
 install_uv() {
@@ -39,6 +39,13 @@ install_uv() {
         curl -LsSf https://astral.sh/uv/install.sh | sh
     fi
     [ -f "$HOME/.local/bin/env" ] && source "$HOME/.local/bin/env"
+}
+
+configure_services() {
+    [ -f /etc/rsyslog.conf ] && $SUDO sed -i 's/^\s*module(load="imklog")/# &/' /etc/rsyslog.conf || true
+    [ -f /etc/rsyslog.conf ] && $SUDO sed -i 's/^#\?\s*SyslogFacility.*/SyslogFacility AUTH/' /etc/rsyslog.conf || true
+    [ -f /etc/rsyslog.conf ] && $SUDO sed -i 's/^#\?\s*LogLevel.*/LogLevel VERBOSE/' /etc/rsyslog.conf || true
+    [ -f /etc/ssh/sshd_config ] && $SUDO sed -i 's/^#\?\s*PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config || true
 }
 
 start_service_if_needed() {
@@ -50,12 +57,6 @@ start_service_if_needed() {
     fi
 }
 
-configure_services() {
-    [ -f /etc/rsyslog.conf ] && $SUDO sed -i 's/^\s*module(load="imklog")/# &/' /etc/rsyslog.conf || true
-    [ -f /etc/rsyslog.conf ] && $SUDO sed -i 's/^#\?\s*SyslogFacility.*/SyslogFacility AUTH/' /etc/rsyslog.conf || true
-    [ -f /etc/rsyslog.conf ] && $SUDO sed -i 's/^#\?\s*LogLevel.*/LogLevel VERBOSE/' /etc/rsyslog.conf || true
-    [ -f /etc/ssh/sshd_config ] && $SUDO sed -i 's/^#\?\s*PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config || true
-}
 
 setup_database() {
     read -p "Enter database name (default: grooot): " dbname
@@ -118,9 +119,9 @@ main() {
     detect_env
     install_dependencies
     install_uv
+    configure_services
     start_service_if_needed rsyslogd
     start_service_if_needed sshd
-    configure_services
     start_service_if_needed mariadb
     setup_database
     create_logcrypt_launcher
