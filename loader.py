@@ -13,7 +13,7 @@ BLUE = "\033[94m"
 WHITE = "\033[97m"
 RESET = "\033[0m"
 CURSOR_BLOCK = "\u2588"
-TEXT = ">_ vicky"
+TEXT = ">_ logcrypt"
 
 MAX_LOG_WIDTH = 45
 LOG_PADDING = 4

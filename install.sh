@@ -14,7 +14,7 @@ cat <<'EOF'
     ░  ░    ░ ░        ░ ░ ░         ░     ░ ░                       
                          ░                 ░ ░                       
                                                                                                         
-                                Made by Vicky Tajpuriya aka admin12121                                                                                                        
+                                Made by vicky aka admin12121                                                                                                        
 EOF
 }
 
@@ -153,7 +153,7 @@ main() {
             [ -f "$HOME/.config/fish/config.fish" ] && source "$HOME/.config/fish/config.fish"
             ;;
         *)
-            # Try sourcing common rc files if shell is unknown
+
             [ -f "$HOME/.bashrc" ] && source "$HOME/.bashrc"
             [ -f "$HOME/.zshrc" ] && source "$HOME/.zshrc"
             ;;

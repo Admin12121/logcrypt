@@ -11,7 +11,6 @@
                   ░  ░    ░ ░        ░ ░ ░         ░     ░ ░                       
                                        ░                 ░ ░                       
 
-
 **logcrypt** is a secure, terminal-based application for managing users and monitoring system authentication logs. It features encrypted log storage, user authentication, and a modern TUI (Textual User Interface) for log viewing and user management.
 
 ---
