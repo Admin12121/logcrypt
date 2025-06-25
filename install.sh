@@ -50,7 +50,6 @@ configure_services() {
 
 start_service() {
     local service="$1"
-    # Try to kill the service if running
     if pgrep -x "$(basename "$service")" >/dev/null 2>&1; then
         echo "Stopping $service..."
         $SUDO pkill -f "$service" || true
@@ -125,6 +124,7 @@ create_logcrypt_launcher() {
 uv run "$SCRIPT_DIR/main.py"
 EOF
     $SUDO chmod +x /usr/sbin/logcrypt
+    $SUDO chmod +x ./start.sh
 }
 
 main() {
@@ -154,12 +154,15 @@ main() {
             ;;
         *)
 
-            [ -f "$HOME/.bashrc" ] && source "$HOME/.bashrc"
-            [ -f "$HOME/.zshrc" ] && source "$HOME/.zshrc"
+            [ -f "~/.bashrc" ] && source "~/.bashrc"
+            [ -f "~/.zshrc" ] && source "~/.zshrc"
             ;;
     esac
-    echo "Shell environment reloaded. If 'logcrypt' is not found, restart your terminal."
-
+    echo
+    echo "If 'uv' is not found, run:"
+    echo "  source ~/.bashrc    # for bash"
+    echo "  source ~/.zshrc     # for zsh"
+    echo "Or restart your terminal."
 }
 
 main "$@"
