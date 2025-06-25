@@ -57,7 +57,11 @@ start_service() {
         sleep 1
     fi
     echo "Starting $service..."
-    $SUDO $service &
+    if [ "$service" = "mariadb" ]; then
+        $SUDO service mariadb start
+    else
+        $SUDO $service &
+    fi
     sleep 1
     if pgrep -x "$(basename "$service")" >/dev/null 2>&1; then
         echo "$service started successfully."
@@ -131,7 +135,7 @@ main() {
     configure_services
     start_service rsyslogd
     start_service /usr/sbin/sshd
-    start_service service mariadb start
+    start_service mariadb
     setup_database
     create_logcrypt_launcher
     echo "LogCrypt installation complete."
