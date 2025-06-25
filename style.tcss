@@ -1,0 +1,139 @@
+Screen {
+    align: center middle;
+}
+
+Login, UserCreate {
+    width: 50;
+    height: auto;
+    content-align: center middle;
+}
+
+#login-box{
+    padding: 2 0;
+    align: center middle;
+}
+
+Input.red {
+    border: solid red;
+}
+#login-error.error {
+    color: red;
+    margin-top: 1;
+}
+
+#title {
+    text-align: center;
+    padding-bottom: 1;
+}
+
+#new-username, #new-password, #username, #password {
+    width: 50;
+    margin: 1 0;
+    border: round #444444;
+    padding: 0 1;
+}
+
+#username:focus, #password:focus {
+    border: round white;
+}
+
+Button {
+    border: round white;
+}
+
+#loader-box {
+    align: center middle;
+    width: 40%;
+    min-width: 40;
+}
+
+#login-box {
+    align: center middle;
+    width: 40%;
+    min-width: 40;
+}
+
+#title {
+    text-align: center;
+}
+
+#login-error {
+    color: red;
+}
+
+#user-label {
+    padding: 1 0;
+}
+
+#searchbox {
+    width: 100%;
+    margin-bottom: 1;
+}
+
+#log-table {
+    height: 80vh;
+}
+
+#error-box {
+    align: center middle;
+    padding: 2;
+    width: 60%;
+    min-width: 40;
+}
+
+#error-title {
+    text-align: center;
+    color: red;
+    margin-bottom: 1;
+}
+
+#error-msg {
+    text-align: center;
+    color: white;
+    margin-bottom: 1;
+}
+
+#exit-btn {
+    text-align: center;
+    border: round red;
+    background: transparent;
+    color: red;
+    width: 20;
+    margin-top: 1;
+}
+
+#app-running-box {
+    width: 50;
+    min-width: 30;
+    height: 20;
+    padding: 1 2;
+    margin: 8 0;
+    align: center middle;
+    border: solid $primary;
+    background: $background;
+}
+
+#running-title {
+    color: $primary;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+#running-msg {
+    margin-bottom: 2;
+}
+
+#button-box {
+    align: center middle;
+}
+
+Button {
+    width: 20;
+    align: center middle;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+Button:last-child {
+    margin-bottom: 0;
+}

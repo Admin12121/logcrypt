@@ -1,0 +1,13 @@
+[project]
+name = "docker"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mysql-connector-python>=9.3.0",
+    "pycryptodome>=3.23.0",
+    "python-decouple>=3.8",
+    "textual>=3.5.0",
+    "watchdog>=6.0.0",
+]
