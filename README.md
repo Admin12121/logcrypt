@@ -1,6 +1,18 @@
-# vicky: Secure Log Monitoring & User Management
+# logcrypt: Secure Log Monitoring & User Management
 
-**vicky** is a secure, terminal-based application for managing users and monitoring system authentication logs. It features encrypted log storage, user authentication, and a modern TUI (Textual User Interface) for log viewing and user management.
+                           ██▓     ▒█████    ▄████  ▄████▄   ██▀███ ▓██   ██▓ ██▓███  ▄▄▄█████▓
+                           ▓██▒    ▒██▒  ██▒ ██▒ ▀█▒▒██▀ ▀█  ▓██ ▒ ██▒▒██  ██▒▓██░  ██▒▓  ██▒ ▓▒
+                           ▒██░    ▒██░  ██▒▒██░▄▄▄░▒▓█    ▄ ▓██ ░▄█ ▒ ▒██ ██░▓██░ ██▓▒▒ ▓██░ ▒░
+                           ▒██░    ▒██   ██░░▓█  ██▓▒▓▓▄ ▄██▒▒██▀▀█▄   ░ ▐██▓░▒██▄█▓▒ ▒░ ▓██▓ ░ 
+                           ░██████▒░ ████▓▒░░▒▓███▀▒▒ ▓███▀ ░░██▓ ▒██▒ ░ ██▒▓░▒██▒ ░  ░  ▒██▒ ░ 
+                           ░ ▒░▓  ░░ ▒░▒░▒░  ░▒   ▒ ░ ░▒ ▒  ░░ ▒▓ ░▒▓░  ██▒▒▒ ▒▓▒░ ░  ░  ▒ ░░   
+                           ░ ░ ▒  ░  ░ ▒ ▒░   ░   ░   ░  ▒     ░▒ ░ ▒░▓██ ░▒░ ░▒ ░         ░    
+                           ░ ░   ░ ░ ░ ▒  ░ ░   ░ ░          ░░   ░ ▒ ▒ ░░  ░░         ░       v1.0.0`
+                              ░  ░    ░ ░        ░ ░ ░         ░     ░ ░                       
+                                                   ░                 ░ ░                       
+
+
+**logcrypt** is a secure, terminal-based application for managing users and monitoring system authentication logs. It features encrypted log storage, user authentication, and a modern TUI (Textual User Interface) for log viewing and user management.
 
 ---
 
@@ -48,7 +60,7 @@
 1. **Clone the repository**  
    ```sh
    git clone <your-repo-url>
-   cd vicky/docker
+   cd logcrypt/docker
    ```
 
 2. **Configure MariaDB**  
@@ -108,7 +120,7 @@
 ## Code Structure
 
 ```
-vicky/
+logcrypt/
 ├── main.py         # TUI entry point and app logic
 ├── loader.py       # Service loader and setup
 ├── log.py          # Log ingestion and encryption
