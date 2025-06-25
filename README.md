@@ -63,38 +63,20 @@
    cd logcrypt/docker
    ```
 
-2. **Configure MariaDB**  
-   - Ensure MariaDB is running.
-   - Create the `groot` database and user, and grant privileges:
-     ```sql
-     CREATE DATABASE groot;
-     CREATE USER 'groot'@'localhost' IDENTIFIED BY 'groot';
-     GRANT ALL PRIVILEGES ON groot.* TO 'groot'@'localhost';
-     FLUSH PRIVILEGES;
-     ```
-   - Create the required tables:
-     ```sql
-     USE groot;
-     CREATE TABLE users (
-         id INT AUTO_INCREMENT PRIMARY KEY,
-         username VARCHAR(255) UNIQUE NOT NULL,
-         password_hash VARCHAR(255) NOT NULL,
-         kdf_salt BLOB NOT NULL
-     );
-     CREATE TABLE auth_logs (
-         id INT AUTO_INCREMENT PRIMARY KEY,
-         timestamp DATETIME NOT NULL,
-         hostname TEXT NOT NULL,
-         service TEXT NOT NULL,
-         message TEXT NOT NULL,
-         state VARCHAR(32) NOT NULL
-     );
-     ```
-
-3. **Run the Application**  
+2. **Run the installer**  
+   The installer will automatically configure MariaDB, create the required database, user, and tables, and set up all dependencies and services.
    ```sh
-   uv run main.py
+   ./install.sh
    ```
+   - Follow the prompts to set up your database and user credentials.
+   - The installer will also create a `.env` file for configuration consistency.
+
+3. **Start the Application**  
+   After installation, simply run:
+   ```sh
+   logcrypt
+   ```
+   - This command will launch the application from anywhere on your system.
    - On first run, you'll be prompted to create the initial user.
    - The loader will check/start required services and launch the TUI.
 
@@ -128,13 +110,14 @@ logcrypt/
 ├── lib.py          # Crypto and DB utilities
 ├── style.tcss      # Textual CSS for UI styling
 ├── pyproject.toml  # package manager for uv
+├── install.sh      # Automated installer and setup script
 ```
 
 ---
 
 ## Troubleshooting
 
-- **Database Connection Errors**: Ensure MariaDB is running and credentials match those in `lib.py`.
+- **Database Connection Errors**: Ensure MariaDB is running and credentials match those in `.env`.
 - **Permission Issues**: The app may require elevated permissions to read `/var/log/auth.log`.
 - **Service Startup**: The loader will attempt to start required services; check logs for errors if startup fails.
 
